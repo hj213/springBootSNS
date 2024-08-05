@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Comment List</title>
+</head>
+<body>
+    <h1>Comment List</h1>
+    <div th:each="comment : ${comments}">
+        <p th:text="${comment.content}"></p>
+        <p>by <small th:text="${comment.member.username}"></small>
+            <a th:if="${session.loginMember != null && session.loginMember.id == comment.member.id}"
+               th:href="@{/comments/delete/{id}(id=${comment.id})}">Delete</a>
+        </p>
+
+    </div>
+    <form th:if="${session.loginMember != null }" th:action="@{/comments/create}" method="post">
+        <input type="hidden" name="postId" th:value="${postId}">
+        <textarea name="content" required></textarea>
+        <button>comment</button>
+    </form>
+    <a th:href="@{/posts/{id}(id=${postId})}">Back to Contents</a>
+</body>
+</html>

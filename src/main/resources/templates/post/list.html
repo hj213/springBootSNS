@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+</head>
+<body>
+    <h1>List</h1>
+    <div th:each="post : ${posts}">
+        <h2 th:text="${post.content}"></h2>
+        <p>Author:
+            <a th:href="@{/members/{id}(id=${post.author.id})}" th:text="${post.author.username}"></a>
+        <a th:href="@{/posts/{id}(id=${post.id})}">View content</a>
+        </p>
+    </div>
+        <a href="/posts/create">Create new content</a>
+        <a href="/members/register">Register</a>
+</body>
+</html>

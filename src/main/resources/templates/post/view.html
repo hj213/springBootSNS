@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>view content</title>
+</head>
+<body>
+    <h1>View Content</h1>
+    <div th:if="${post != null}">
+        <p th:text="${post.content}"></p>
+        <p>Author: <a th:href="@{/members/{id}(id=${post.author.id})}" th:text="${post.author.username}"></a></p>
+        <p> Like: <span th:text="${post.likes.size()}"></span></p>
+        <form th:if="${session.loginMember != null}" th:action="@{/likes/toggle/{postId}(postId=${post.id})}" method="post">
+        <button th:text="${isLiked?'좋아요 취소' : '좋아요' }">LIKE</button>
+        </form>
+        <a th:href="@{/comments/post/{id}(id=${post.id})}">comments</a>
+    </div>
+    <a href="/posts">Back to Content List</a>
+</body>
+</html>
